@@ -32,8 +32,8 @@ Users should be able to:
 
 ### Screenshot
 
-![Tela de Login](./src/img/telaDeLogin.png)
-![Formulario de preenchimento](./src/img/formulario.png)
+![Tela de Login](./src/img/telaDeLogin.jpeg)
+![Formulario de preenchimento](./src/img/formulario.jpeg)
 
 
 
