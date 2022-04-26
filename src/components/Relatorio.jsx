@@ -39,6 +39,7 @@ export default function Relatorio() {
                     <Option value='Encontro FJU'>Encontro FJU</Option>
                     <Option value='Quarta-feira'>Quarta-Feira</Option>
                     <Option value='Encontro FJU'>Domingo</Option>
+                    <Option value='Encontro FJU'>Templo</Option>
                 </Reuniao>
           
 
