@@ -14,16 +14,10 @@ export default function Container() {
    if (usuario === 'fjubelavista' && senha === 'belavista1401') {
      setEntrar(false)
      setReport(true)
-     console.log('logou');
    } else {
     e.preventDefault()
      setInvalido(true)
    }
-    
-  }
-
-  function Gerar(e) {
-    e.preventDefault()
     
   }
 
@@ -33,7 +27,7 @@ export default function Container() {
         <Login Entrar={Entrar} usuario={usuario} senha={senha} setUsuario={setUsuario} setSenha={setSenha} invalido={invalido}/>
       )}
       {report && ( 
-      <Relatorio Gerar={Gerar} /> 
+      <Relatorio /> 
       )}
     </ContainerDiv>
   );
@@ -42,7 +36,8 @@ export default function Container() {
 const ContainerDiv = styled.div`
   background-color: #2c3343;
   width: 100%;
-  height: 100vh;
+  min-height: 100vh;
+  max-height: 100%;
   display: flex;
   justify-content: center;
   align-items: center;

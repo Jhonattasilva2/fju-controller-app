@@ -1,9 +1,21 @@
-import React from 'react'
+import React, {useState} from 'react'
 import styled from 'styled-components'
-import {useForm} from 'react-hook-form'
 import LogoFju from '../img/Logo_Força_Jovem_Universal.svg'
 
-export default function Relatorio({Gerar}) {
+export default function Relatorio() {
+    const [nomeJovem, setNomeJovem] = useState([{nome: ''} ])
+
+    function Gerar(e) {
+        e.preventDefault()
+        alert('Relatório gerado com sucesso')
+      }
+
+      function addJovem() {
+        setNomeJovem([...nomeJovem, {nome: ''}])
+      }
+
+    
+
   return (
     <ContainerForm>
             <Logo src={LogoFju} alt='logotype' />
@@ -40,9 +52,16 @@ export default function Relatorio({Gerar}) {
             <NumberInput type='number' id='total' name='total' placeholder='1' />
 
             <Label htmlFor='nome'>Nome dos jovens</Label>
-            <NameInput type='text' id='nome' name='nome' placeholder='Digite o nome dos jovens'/>
-
-            <Jovem>+ Add Jovem</Jovem>
+           
+            
+            {nomeJovem.map((singleName, index) => {
+                return (
+                    <>
+                        <NameInput key={index} type='text' id='nome' name='nome' placeholder='Digite o nome do jovem'/>
+                        {nomeJovem.length -1 === index && nomeJovem.length < 20 && <Jovem onClick={addJovem}>+ Add Jovem</Jovem>}
+                    </>  
+                )
+            })}
 
             <GerarRelatorio type='submit'>Gerar Relatório</GerarRelatorio>
         </Form>
@@ -56,7 +75,6 @@ const ContainerForm = styled.div`
     display: flex;
     flex-direction: column;
     align-items: center;
-
 `
 
 const Logo = styled.img`
@@ -66,7 +84,7 @@ const Logo = styled.img`
 const Form = styled.form`
     min-width: 284px;
     min-height: 480px;
-    max-height: 520px;
+    max-height: 100%;
     background-color: #FFF;
     border-radius: 0.62rem;
     display: flex;
@@ -111,6 +129,7 @@ const NameInput = styled.input`
     min-height: 25px;
     border: 1px solid #2C3343;
     padding-left: 0.5rem;
+    margin: 0.5rem 0;
 
     &:hover {
         border: 1px solid #4169E1;
@@ -130,7 +149,7 @@ const NumberInput = styled.input`
 `
 
 const Jovem = styled.button`
-    width: 3.8rem;
+    min-width: 3.8rem;
     height: 1.5rem;
     font-size: 0.5rem;
     align-self: flex-end;
