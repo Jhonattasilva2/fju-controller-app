@@ -1,15 +1,18 @@
 import React, {useState} from 'react'
 import styled from 'styled-components'
 import LogoFju from '../img/Logo_Força_Jovem_Universal.svg'
+import {useForm} from 'react-hook-form'
 
 export default function Relatorio() {
     const [nomeJovem, setNomeJovem] = useState([{nome: ''} ])
+    const {register, handleSubmit} = useForm()
 
-    function Gerar(e) {
-        e.preventDefault()
-        alert('Relatório gerado com sucesso')
+    function Gerar(data) {
+        console.log(data)
       }
 
+    
+    
       function addJovem() {
         setNomeJovem([...nomeJovem, {nome: ''}])
       }
@@ -19,10 +22,10 @@ export default function Relatorio() {
   return (
     <ContainerForm>
             <Logo src={LogoFju} alt='logotype' />
-        <Form onSubmit={Gerar}>
+        <Form onSubmit={handleSubmit(Gerar)}>
             <Label htmlFor='tribo'>Qual a sua Tribo? </Label>
 
-            <Tribos id='tribo'>
+            <Tribos id='tribo' {...register('Tribo')}>
                 <Option value='Efraim'>Efraim </Option>
                 <Option value='Judá'>Judá</Option>
                 <Option value='Levi'>Levi</Option>
@@ -35,7 +38,7 @@ export default function Relatorio() {
 
             <Label htmlFor='reuniao'>Qual a reunião? </Label>
 
-                <Reuniao id='reuniao'>
+                <Reuniao id='reuniao' {...register('Reuniao')}>
                     <Option value='Encontro FJU'>Encontro FJU</Option>
                     <Option value='Quarta-feira'>Quarta-Feira</Option>
                     <Option value='Encontro FJU'>Domingo</Option>
@@ -44,13 +47,13 @@ export default function Relatorio() {
           
 
             <Label htmlFor='lider'>Líder da Tribo</Label>
-            <NameInput type='text' id='lider' name='lider' placeholder='Digite o nome do líder'/>
+            <NameInput type='text' id='lider' {...register('lider')} placeholder='Digite o nome do líder'/>
 
             <Label htmlFor='novos'>Jovens novos ou distantes</Label>
-            <NumberInput type='number' id='novos' name='novos' placeholder='0'/>
+            <NumberInput type='number' id='novos' {...register('novos')} placeholder='0'/>
 
             <Label htmlFor='total'>Total de jovens</Label>
-            <NumberInput type='number' id='total' name='total' placeholder='1' />
+            <NumberInput type='number' id='total' {...register('total')} placeholder='1' />
 
             <Label htmlFor='nome'>Nome dos jovens</Label>
            
@@ -58,7 +61,7 @@ export default function Relatorio() {
             {nomeJovem.map((singleName, index) => {
                 return (
                     <>
-                        <NameInput key={index} type='text' id='nome' name='nome' placeholder='Digite o nome do jovem'/>
+                        <NameInput key={index} type='text' id='nome' {...register('nome')} placeholder='Digite o nome do jovem'/>
                         {nomeJovem.length -1 === index && nomeJovem.length < 20 && <Jovem onClick={addJovem}>+ Add Jovem</Jovem>}
                     </>  
                 )
