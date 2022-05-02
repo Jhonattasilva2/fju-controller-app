@@ -6,6 +6,7 @@ import {useForm} from 'react-hook-form'
 export default function Relatorio() {
     const [nomeJovem, setNomeJovem] = useState([{nome: ''} ])
     const {register, handleSubmit} = useForm()
+   
 
     function Gerar(data) {
         console.log(data)
@@ -59,9 +60,10 @@ export default function Relatorio() {
            
             
             {nomeJovem.map((singleName, index) => {
+                 for (let i = 0; i<10; i++)
                 return (
                     <>
-                        <NameInput key={index} type='text' id='nome' {...register('nome')} placeholder='Digite o nome do jovem'/>
+                        <NameInput key={index} type='text' id='nome' {...register(`nome${i}`)} placeholder='Digite o nome do jovem'/>
                         {nomeJovem.length -1 === index && nomeJovem.length < 20 && <Jovem onClick={addJovem}>+ Add Jovem</Jovem>}
                     </>  
                 )
