@@ -2,8 +2,10 @@ import React, {useState} from 'react'
 import styled from 'styled-components'
 import LogoFju from '../img/Logo_Força_Jovem_Universal.svg'
 import {useForm} from 'react-hook-form'
+import database from '../db.json'
 
 export default function Relatorio() {
+ 
     const [nomeJovem, setNomeJovem] = useState([{nome: ''} ])
     const {register, handleSubmit} = useForm()
    
@@ -12,10 +14,8 @@ export default function Relatorio() {
         console.log(data)
       }
 
-    
-    
       function addJovem() {
-        setNomeJovem([...nomeJovem, {nome: ''}])
+            setNomeJovem([...nomeJovem, {nome: ''}])
       }
 
     
@@ -58,16 +58,17 @@ export default function Relatorio() {
 
             <Label htmlFor='nome'>Nome dos jovens</Label>
            
-            
             {nomeJovem.map((singleName, index) => {
-                 for (let i = 0; i<10; i++)
-                return (
-                    <>
-                        <NameInput key={index} type='text' id='nome' {...register(`nome${i}`)} placeholder='Digite o nome do jovem'/>
-                        {nomeJovem.length -1 === index && nomeJovem.length < 20 && <Jovem onClick={addJovem}>+ Add Jovem</Jovem>}
-                    </>  
-                )
+
+                    return (
+                        <>
+                            <NameInput key={index} type='text' id='nome' {...register('nome' + index)} placeholder='Digite o nome do jovem'/>
+                            {nomeJovem.length -1 === index && nomeJovem.length < 20 && <Jovem onClick={addJovem}>+ Add Jovem</Jovem>}
+                        </>  
+                    )
             })}
+            
+            
 
             <GerarRelatorio type='submit'>Gerar Relatório</GerarRelatorio>
         </Form>
