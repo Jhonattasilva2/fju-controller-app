@@ -1,9 +1,11 @@
-import React from 'react'
+import {useContext} from 'react'
 import styled from 'styled-components'
 import Invalido from './Invalido'
+import {AppContext} from '../context/AppContext'
 import LogoFju from '../img/Logo_Força_Jovem_Universal.svg'
 
-export default function Login({Entrar, usuario, senha, setUsuario, setSenha, invalido}) {
+export default function Login() {
+const {Entrar, usuario, setUsuario, senha, setSenha, invalido} = useContext(AppContext)
   
     
   return (

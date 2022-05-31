@@ -1,34 +1,23 @@
-import React, { useState } from "react";
+import React, { useContext } from "react";
 import styled from "styled-components";
 import Login from "./Login";
+import Card from "./Card";
 import Relatorio from "./Relatorio";
+import { AppContext } from "../context/AppContext";
 
 export default function Container() {
-  const [entrar, setEntrar] = useState(true);
-  const [report, setReport] = useState(false);
-  const [usuario, setUsuario] = useState('')
-  const [senha, setSenha] = useState('')
-  const [invalido, setInvalido] = useState(false)
-  
-
-  function Entrar(e) {
-   if (usuario === 'fjubelavista' && senha === 'belavista1401') {
-     setEntrar(false)
-     setReport(true)
-   } else {
-    e.preventDefault()
-     setInvalido(true)
-   }
-    
-  }
+  const {entrar, report, card} = useContext(AppContext)
 
   return (
     <ContainerDiv>
       {entrar && (
-        <Login Entrar={Entrar} usuario={usuario} senha={senha} setUsuario={setUsuario} setSenha={setSenha} invalido={invalido}/>
+        <Login/>
       )}
       {report && ( 
       <Relatorio /> 
+      )}
+      {card && (
+        <Card />
       )}
     </ContainerDiv>
   );

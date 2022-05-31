@@ -1,37 +1,11 @@
-import React, { useState} from 'react'
+import { useContext } from 'react'
 import styled from 'styled-components'
 import LogoFju from '../img/Logo_Força_Jovem_Universal.svg'
-import { useForm } from 'react-hook-form'
+import { AppContext } from '../context/AppContext'
 
 export default function Relatorio() {
-    const [nomeJovem, setNomeJovem] = useState([{ nome: '' }])
-    
-    const { register, handleSubmit } = useForm()
-    const dataAtual = new Date()
-    const dia = dataAtual.getDate()
-    const mes = dataAtual.getMonth() + 1
-    const ano = dataAtual.getFullYear()
-    const data = `${dia}/${mes}/${ano}`
-
-
-    function Enviar(data) {
-        fetch('http://localhost:3333/db', {
-            method: 'POST',
-            headers: {
-                'Content-Type': 'application/json',
-            },
-            body: JSON.stringify(data),
-        })
-            .then((res) => res.json())
-            .then((data) => {
-                console.log(data)
-            })
-            .catch((err) => console.log(err))
-    }
-
-    function addJovem() {
-        setNomeJovem([...nomeJovem, { nome: '' }])
-    }
+    const { register, handleSubmit, Enviar, nomeJovem, addJovem, data } =
+        useContext(AppContext)
 
     return (
         <ContainerForm>
@@ -39,7 +13,7 @@ export default function Relatorio() {
             <Form onSubmit={handleSubmit(Enviar)}>
                 <Label htmlFor='tribo'>Qual a sua Tribo? </Label>
 
-                <Tribos id='tribo' {...register('Tribo')}>
+                <Tribos id='tribo' {...register('Tribo')} required>
                     <Option value='Efraim'>Efraim </Option>
                     <Option value='Judá'>Judá</Option>
                     <Option value='Levi'>Levi</Option>
@@ -52,7 +26,7 @@ export default function Relatorio() {
 
                 <Label htmlFor='reuniao'>Qual a reunião? </Label>
 
-                <Reuniao id='reuniao' {...register('Reuniao')}>
+                <Reuniao id='reuniao' {...register('Reuniao')} required>
                     <Option value='Encontro FJU'>Encontro FJU</Option>
                     <Option value='Quarta-feira'>Quarta-Feira</Option>
                     <Option value='Encontro FJU'>Domingo</Option>
@@ -65,6 +39,7 @@ export default function Relatorio() {
                     id='lider'
                     {...register('lider')}
                     placeholder='Digite o nome do líder'
+                    required
                 />
 
                 <Label htmlFor='novos'>Jovens novos ou distantes</Label>
@@ -73,6 +48,7 @@ export default function Relatorio() {
                     id='novos'
                     {...register('novos')}
                     placeholder='0'
+                    required
                 />
 
                 <Label htmlFor='total'>Total de jovens</Label>
@@ -81,6 +57,7 @@ export default function Relatorio() {
                     id='total'
                     {...register('total')}
                     placeholder='1'
+                    required
                 />
 
                 <Label htmlFor='nome'>Nome dos jovens</Label>
@@ -94,6 +71,7 @@ export default function Relatorio() {
                                 id='nome'
                                 {...register('nome' + index)}
                                 placeholder='Digite o nome do jovem'
+                                required
                             />
                             {nomeJovem.length - 1 === index &&
                                 nomeJovem.length < 20 && (
@@ -104,7 +82,12 @@ export default function Relatorio() {
                         </>
                     )
                 })}
-                <Hidden type='hidden' id='date' {...register('date')} value={data}></Hidden>
+                <Hidden
+                    type='hidden'
+                    id='date'
+                    {...register('date')}
+                    value={data}
+                ></Hidden>
                 <GerarRelatorio type='submit'>Enviar Relatório</GerarRelatorio>
             </Form>
         </ContainerForm>
