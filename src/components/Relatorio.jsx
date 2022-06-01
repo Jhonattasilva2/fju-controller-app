@@ -63,16 +63,17 @@ export default function Relatorio() {
                 <Label htmlFor='nome'>Nome dos jovens</Label>
 
                 {nomeJovem.map((singleName, index) => {
+                    
                     return (
                         <>
-                            <NameInput
+                            {[<NameInput
                                 key={index}
                                 type='text'
                                 id='nome'
                                 {...register('nome' + index)}
                                 placeholder='Digite o nome do jovem'
                                 required
-                            />
+                            />]}
                             {nomeJovem.length - 1 === index &&
                                 nomeJovem.length < 20 && (
                                     <Jovem onClick={addJovem}>

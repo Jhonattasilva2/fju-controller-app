@@ -45,11 +45,12 @@ export function AppContextProvider({ children }) {
 
             setReport(false)
             setCard(true)
-            
     }
 
     function addJovem() {
+        const jovens = []
         setNomeJovem([...nomeJovem, { nome: '' }])
+        jovens.push(nomeJovem)
     }
 
     return (
