@@ -3,10 +3,11 @@ import styled from "styled-components";
 import Login from "./Login";
 import Card from "./Card";
 import Relatorio from "./Relatorio";
+import Relatorios from "./Relatorios";
 import { AppContext } from "../context/AppContext";
 
 export default function Container() {
-  const {entrar, report, card} = useContext(AppContext)
+  const {entrar, report, relatorios, card} = useContext(AppContext)
 
   return (
     <ContainerDiv>
@@ -15,6 +16,9 @@ export default function Container() {
       )}
       {report && ( 
       <Relatorio /> 
+      )}
+      {relatorios && (
+        <Relatorios />
       )}
       {card && (
         <Card />

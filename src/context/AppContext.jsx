@@ -6,6 +6,7 @@ export const AppContext = createContext()
 export function AppContextProvider({ children }) {
     const [entrar, setEntrar] = useState(true)
     const [report, setReport] = useState(false)
+    const [relatorios, setRelatorios] = useState(false)
     const [invalido, setInvalido] = useState(false)
     const [card, setCard] = useState(false)
     const [usuario, setUsuario] = useState('')
@@ -22,12 +23,17 @@ export function AppContextProvider({ children }) {
         if (usuario === 'fjubelavista' && senha === 'belavista1401') {
             setEntrar(false)
             setReport(true)
+        } else if (
+            usuario === 'relatoriofjubelavista' &&
+            senha === 'belavista1401'
+        ) {
+            setEntrar(false)
+            setRelatorios(true)
         } else {
             e.preventDefault()
             setInvalido(true)
         }
     }
-
 
     function Enviar(data) {
         fetch('http://localhost:3333/db', {
@@ -43,14 +49,12 @@ export function AppContextProvider({ children }) {
             })
             .catch((err) => console.log(err))
 
-            setReport(false)
-            setCard(true)
+        setReport(false)
+        setCard(true)
     }
 
     function addJovem() {
-        const jovens = []
         setNomeJovem([...nomeJovem, { nome: '' }])
-        jovens.push(nomeJovem)
     }
 
     return (
@@ -58,6 +62,7 @@ export function AppContextProvider({ children }) {
             value={{
                 entrar,
                 report,
+                relatorios,
                 card,
                 Entrar,
                 usuario,
@@ -70,7 +75,7 @@ export function AppContextProvider({ children }) {
                 Enviar,
                 nomeJovem,
                 addJovem,
-                data
+                data,
             }}
         >
             {children}
