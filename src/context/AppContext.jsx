@@ -1,4 +1,4 @@
-import { createContext, useState } from 'react'
+import { createContext, useState, useEffect } from 'react'
 import { useForm } from 'react-hook-form'
 
 export const AppContext = createContext()
@@ -9,6 +9,7 @@ export function AppContextProvider({ children }) {
     const [relatorios, setRelatorios] = useState(false)
     const [invalido, setInvalido] = useState(false)
     const [card, setCard] = useState(false)
+    const [cardRelatorios, setCardRelatorios] = useState('')
     const [usuario, setUsuario] = useState('')
     const [senha, setSenha] = useState('')
     const [nomeJovem, setNomeJovem] = useState([{ nome: '' }])
@@ -57,6 +58,17 @@ export function AppContextProvider({ children }) {
         setNomeJovem([...nomeJovem, { nome: '' }])
     }
 
+  
+    useEffect(() => {
+        fetch('http://localhost:3333/db')
+            .then(res => res.json())
+            .then(data => {
+                setCardRelatorios(data.db)
+                console.log(data.db)
+            })
+            .catch((err) => console.log(err))
+    }, [])
+
     return (
         <AppContext.Provider
             value={{
@@ -64,6 +76,7 @@ export function AppContextProvider({ children }) {
                 report,
                 relatorios,
                 card,
+                cardRelatorios,
                 Entrar,
                 usuario,
                 setUsuario,

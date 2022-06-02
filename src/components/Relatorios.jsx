@@ -1,21 +1,16 @@
-import React from 'react'
+import {useContext} from 'react'
 import styled from 'styled-components'
+import { AppContext } from '../context/AppContext'
+import RelatorioCard from './RelatorioCard'
 
 export default function Relatorios() {
+    const {cardRelatorios} = useContext(AppContext)
+
     return (
         <RelatoriosDiv>
-            <RelatorioCard>Texto</RelatorioCard>
-            <RelatorioCard>Texto</RelatorioCard>
-            <RelatorioCard>Texto</RelatorioCard>
-            <RelatorioCard>Texto</RelatorioCard>
-            <RelatorioCard>Texto</RelatorioCard>
-            <RelatorioCard>Texto</RelatorioCard>
-            <RelatorioCard>Texto</RelatorioCard>
-            <RelatorioCard>Texto</RelatorioCard>
-            <RelatorioCard>Texto</RelatorioCard>
-            <RelatorioCard>Texto</RelatorioCard>
-            <RelatorioCard>Texto</RelatorioCard>
-            <RelatorioCard>Texto</RelatorioCard>
+            {cardRelatorios.map((cardRelatorio) => {
+                return <RelatorioCard key={cardRelatorio.id} {...cardRelatorio}/>
+            })}
         </RelatoriosDiv>
     )
 }
@@ -32,13 +27,4 @@ const RelatoriosDiv = styled.div`
     overflow-y: scroll;
 `
 
-const RelatorioCard = styled.div`
-background-color: red;
-color: white;
-min-height: 130px;
-margin: 0.5rem;
-border-radius: 0.62rem;
-display: flex;
-justify-content: center;
-align-items: center;
-`
+
