@@ -3,6 +3,9 @@
 This is a private WebApp cretedd as volunteering
 
 
+Obs: Discontinued project 
+
+
 ## Table of contents
 
 - [Overview](#overview)
